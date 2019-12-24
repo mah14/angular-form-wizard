@@ -1,0 +1,230 @@
+<button class="close-btn" (click)="closeModal()">X</button>
+<form-wizard>
+  <wizard-step [title]="'Project Details'"  (onNext)="onStep1Next($event)" [isValid]="s1Form.valid"><!-- [isValid]="s1Form.valid" -->
+    <h1>Project Details:</h1>
+    <form [formGroup]="s1Form">
+    	<div class="input-wrapper">
+	    	<label>Project Name</label>
+	    	<div [ngClass]="{ 'is-invalid': f.projectName.value.length > 0 &&f.projectName.errors }">
+	    		<input 
+	    			type="text" 
+	    			minlength="3" 
+	    			maxlength="255" 
+	    			formControlName="projectName">
+	    		<div *ngIf="f.projectName.errors" class="invalid-feedback">
+		    		<p *ngIf="f.projectName.errors.minlength">{{errors.minlength}}</p>
+		    		<p *ngIf="f.projectName.errors.pattern">{{errors.textPattern}}</p>
+		    	</div>
+	    	</div>	    	
+	    </div>
+    	<div class="input-wrapper">
+	    	<label>Project Owner</label>
+	    	<div [ngClass]="{ 'is-invalid': f.projectOwner.value.length > 0 &&f.projectOwner.errors }">
+	    		<input 
+	    			type="text" 
+	    			minlength="3" 
+	    			maxlength="255" 
+	    			formControlName="projectOwner">
+	    		<div *ngIf="f.projectOwner.errors" class="invalid-feedback">
+		    		<p *ngIf="f.projectOwner.errors.minlength">{{errors.minlength}}</p>
+		    		<p *ngIf="f.projectOwner.errors.pattern">{{errors.textPattern}}</p>
+		    	</div>
+	    	</div>		    
+	    </div>
+    	<div class="input-wrapper"> 
+	    	<label>Customer Name</label>
+	    	<div [ngClass]="{ 'is-invalid': f.customerName.value.length > 0 &&f.customerName.errors }">
+	    		<input 
+	    			type="text" 
+	    			minlength="3" 
+	    			maxlength="255" 
+	    			formControlName="customerName">
+	    		<div *ngIf="f.customerName.errors" class="invalid-feedback">
+		    		<p *ngIf="f.customerName.errors.minlength">{{errors.minlength}}</p>
+		    		<p *ngIf="f.customerName.errors.pattern">{{errors.textPattern}}</p>
+		    	</div>
+	    		<p>If you want your invoices addressed to a company. Leave blank to use your full name</p>
+	    	</div>
+	    </div>
+    	<div class="input-wrapper">
+	    	<label>Contact Phone</label>
+	    	<div [ngClass]="{ 'is-invalid': f.contactPhone.value.length > 0 &&f.contactPhone.errors }">
+	    		<i class="has-icon phone"></i>
+	    		<input 
+	    			type="tel"
+	    			maxlength="11" 
+	    			formControlName="contactPhone">
+	    		<div *ngIf="f.contactPhone.errors" class="invalid-feedback">
+		    		<p *ngIf="f.contactPhone.errors.pattern">{{errors.numberPattern}}</p>
+		    	</div>
+	    	</div>		    
+	    </div>
+    	<div class="input-wrapper">
+	    	<label>Email Address</label>
+	    	<div [ngClass]="{ 'is-invalid': f.emailAddress.value.length > 0 &&f.emailAddress.errors }">
+	    		<i class="has-icon"></i>
+	    		<input 
+	    			type="email" 
+	    			formControlName="emailAddress">
+	    		<div *ngIf="f.emailAddress.errors" class="invalid-feedback">
+		    		<p *ngIf="f.emailAddress.errors.pattern">{{errors.emailPattern}}</p>
+		    	</div>
+	    		<p>We'll never share your email with anyone else.</p>
+	    	</div>		    
+	    </div>
+    	<div class="input-wrapper">
+	    	<label>Company Site</label>
+	    	<div>
+		    	<i class="has-text">.com</i>
+	    		<input type="text" name="" formControlName="companySite">
+	    	</div>		    
+	    </div>
+    </form>
+  </wizard-step>
+  <wizard-step [title]="'Project Settings'" (onNext)="onStep2Next($event)" [isValid]="s2Form.valid"><!-- [isValid]="s2Form.valid" -->
+    <h1>Project Settings</h1>
+    <form [formGroup]="s2Form">
+    	<div class="input-wrapper">
+	    	<label>Email Address</label>
+	    	<div [ngClass]="{ 'is-invalid': ff.email.value.length > 0 &&ff.email.errors }">
+	    		<i class="has-icon"></i>
+	    		<input 
+	    			type="email" 
+	    			formControlName="email">
+	    		<div *ngIf="ff.email.errors" class="invalid-feedback">
+		    		<p *ngIf="ff.email.errors.pattern">{{errors.emailPattern}}</p>
+		    	</div>
+	    		<p>Email will not be publicly displayed. <a href="#">Learn more.</a></p>
+	    	</div>		    
+	    </div>
+    	<div class="input-wrapper">
+	    	<label>Language</label>
+	    	<div>
+				<select formControlName="language">
+					<option value="" disabled>Choose your language</option>
+				   	<option *ngFor="let lang of Language" [ngValue]="lang">{{lang}}</option>
+				</select>
+	    	</div>	    	
+	    </div>
+    	<div class="input-wrapper">
+	    	<label>Time Zone</label>
+	    	<div>
+				<select formControlName="timeZone">
+					<option value="" disabled>Choose your time zone</option>
+				   	<option *ngFor="let timeZ of TimeZone" [ngValue]="timeZ.value">{{timeZ.label}}</option>
+				</select>
+	    	</div>	
+	    </div>
+    	<div class="input-wrapper"> 
+	    	<label>Cummonication</label>
+	    	<div class="checkbox-row" formGroupName="cummonication">
+		        <div>
+		          <input type="checkbox" formControlName="email">
+		          Email
+		        </div>
+		        <div>
+		          <input type="checkbox" formControlName="sms">
+		          SMS
+		        </div>
+		        <div>
+		          <input type="checkbox" formControlName="phone">
+		          Phone
+		        </div>
+	    	</div>
+	    </div>
+    </form>
+  </wizard-step>
+  <wizard-step [title]="'Delivery Details'" (onNext)="onStep3Next($event)" [isValid]="s3Form.valid">
+    <h1>Setup Your Address</h1>
+    <form [formGroup]="s3Form" class="form-style2">
+    	<div class="input-wrapper">
+	    	<label>Address Line 1</label>
+	    	<div>
+	    		<input 
+	    			type="text"  
+	    			formControlName="address1">
+	    	</div>	    	
+	    </div>
+    	<div class="input-wrapper">
+	    	<label>Address Line 2</label>
+	    	<div>
+	    		<input 
+	    			type="text" 
+	    			formControlName="address2">
+	    	</div>		    
+	    </div>
+	    <div class="col-2">
+	    	<div class="input-wrapper"> 
+		    	<label>Postcode</label>
+		    	<div>
+		    		<input 
+		    			type="text" 
+		    			formControlName="postCode">
+		    	</div>
+		    </div>
+	    	<div class="input-wrapper">
+		    	<label>City</label>
+		    	<div>
+		    		<input 
+		    			type="text"
+		    			formControlName="city">
+		    	</div>		    
+		    </div>
+		</div>
+	    <div class="col-2">
+	    	<div class="input-wrapper">
+		    	<label>State</label>
+		    	<div>
+		    		<input 
+		    			type="text" 
+		    			formControlName="state">
+		    	</div>		    
+		    </div>
+	    	<div class="input-wrapper">
+		    	<label>Country</label>
+		    	<div>
+					<select formControlName="country">
+						<option value="" disabled>Choose your country</option>
+					   	<option *ngFor="let country of Country" [ngValue]="country">{{country}}</option>
+					</select>
+		    	</div>		    
+		    </div>
+		</div>
+    </form>
+  </wizard-step>
+  <wizard-step [title]="'Review and Submit'" (onComplete)="onComplete($event)">
+    <div [ngSwitch]="isCompleted">
+      <div *ngSwitchDefault>
+        <h1>Review Your Details and Submit</h1>
+        <div class="details-box">
+        	<h3>Project Details</h3>
+        	<ul>
+        		<li>{{data?.projectName +', '+ data?.projectOwner +', '+ data?.customerName}}</li>
+        		<li>Phone: {{data?.contactPhone}}</li>
+        		<li>Email: {{data?.pdEmailAddress}}</li>
+        		<li>Site: {{data?.companySite}}</li>
+        	</ul>
+        </div>
+        <div class="details-box">
+        	<h3>Delivery Address</h3>
+        	<ul>
+        		<li>{{data?.address1}}</li>
+        		<li>{{data?.address2}}</li>
+        		<li>{{data?.city +' '+ data?.postCode +', '+ data?.state +', '+ data?.country}}</li>
+        	</ul>
+        </div>
+        <div class="details-box">
+        	<h3>Paynent Details</h3>
+        	<ul>
+        		<li>Card Number: XXXX XXXX XXXX 1111</li>
+        		<li>Card Name: {{data?.customerName}}</li>
+        		<li>Card Expiry: 01/21</li>
+        	</ul>
+        </div>
+      </div>
+      <div *ngSwitchCase="true">
+        <h4>Thank you! You have completed all the steps.</h4>
+      </div>
+    </div>
+  </wizard-step>
+</form-wizard>

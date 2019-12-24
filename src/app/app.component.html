@@ -1,0 +1,55 @@
+<button class="startBtn" (click)="start()">+ ADD NEW PROJECT</button>
+<table>
+	<thead>
+		<tr>
+			<th>Project Name</th>
+			<th>Project Owner</th>
+			<th>Customer Name</th>
+			<th>Phone</th>
+			<th>Email</th>
+			<th>Site</th>
+			<th>Address</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngIf="data">
+			<td>{{data?.projectName}}</td>
+			<td>{{data?.projectOwner}}</td>
+			<td>{{data?.customerName}}</td>
+			<td>{{data?.contactPhone}}</td>
+			<td>{{data?.pdEmailAddress}}</td>
+			<td>{{data?.companySite}}</td>
+			<td>{{data?.city +' '+ data?.postCode +', '+ data?.state +', '+ data?.country}}</td>
+		</tr>
+		<tr>
+			<td>Loop CRM</td>
+			<td>Krox</td>
+			<td>Loop Inc.</td>
+			<td>09121111111</td>
+			<td>test@gmail.com</td>
+			<td>www.testsite.com</td>
+			<td>Melbourne 3000, VIC, Australia</td>
+		</tr>
+		<tr>
+			<td>Loop CRM</td>
+			<td>Krox</td>
+			<td>Loop Inc.</td>
+			<td>09121111111</td>
+			<td>test@gmail.com</td>
+			<td>www.testsite.com</td>
+			<td>Melbourne 3000, VIC, Australia</td>
+		</tr>
+		<tr>
+			<td>Loop CRM</td>
+			<td>Krox</td>
+			<td>Loop Inc.</td>
+			<td>09121111111</td>
+			<td>test@gmail.com</td>
+			<td>www.testsite.com</td>
+			<td>Melbourne 3000, VIC, Australia</td>
+		</tr>
+
+	</tbody>
+</table>
+<app-my-wizard *ngIf="showWizard" (showMyWizard)="closeM()" (tableData)="getData($event)"></app-my-wizard>
+<router-outlet></router-outlet>
